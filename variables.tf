@@ -21,7 +21,7 @@ variable "rubrik_support_password" {
 }
 
 variable "aws_prefix" {
-  
+
 }
 
 variable "rubrik_admin_email" {
@@ -32,35 +32,35 @@ variable "rubrik_user" {
   default = "admin"
 }
 variable "rubrik_pass" {
-  type = string
+  type    = string
   default = "rubrik123"
 }
 variable "rubrik_cluster_name" {
-  type = string
+  type    = string
   default = "rubrik-cloud-cluster"
 }
 variable "rubrik_node_count" {
-  type = number
+  type    = number
   default = 3
 }
 variable "rubrik_dns_nameservers" {
-  type = string
+  type    = string
   default = "8.8.8.8"
 }
 variable "rubrik_dns_search_domain" {
-  type = string
+  type    = string
   default = ""
 }
 variable "rubrik_ntp_servers" {
-  type = string
+  type    = string
   default = "pool.ntp.org"
 }
 variable "rubrik_use_cloud_storage" {
-  type = string
+  type    = string
   default = "y"
 }
 variable "ssh_key_pair_path" {
-  type = string
+  type    = string
   default = "/home/ec2-user/.ssh/"
 }
 
