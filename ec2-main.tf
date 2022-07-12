@@ -29,7 +29,7 @@ resource "local_file" "configure_sh" {
   })
   filename = "${path.module}/configure.sh"
 }
-resource "aws_key_pair" "pure_cbs_key_pair" {
+resource "aws_key_pair" "openssh_key_pair" {
   key_name   = var.aws_key_name
   public_key = var.aws_key_pub
 }
@@ -38,7 +38,7 @@ resource "aws_instance" "linux_iscsi_workload" {
     module.rubrik-cloud-cluster,
   ]
   ami                    = data.aws_ami.amazon_linux2.image_id
-  instance_type          = "t3.large"
+  instance_type          = var.aws_instance_type
   vpc_security_group_ids = [aws_security_group.bastion.id, module.rubrik-cloud-cluster.workoad_security_group_id]
   get_password_data      = false
   subnet_id              = aws_subnet.workload.id

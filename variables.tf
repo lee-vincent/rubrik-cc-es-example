@@ -21,26 +21,27 @@ variable "aws_key" {
 }
 variable "aws_prefix" {
 }
-variable "aws_bastion_instance_type" {
-  type = string
+variable "aws_instance_type" {
+  type        = string
+  description = "EC2 instance type to use for the bastion host and workload host"
 }
 # Rubrik Cloud Cluster Variables
 variable "rubrik_support_password" {
-  type = string
+  type        = string
   description = "support.rubrik.com password"
 }
 variable "rubrik_admin_email" {
-  type = string
+  type        = string
   description = "support.rubrik.com email - will also be used as admin email during cluster bootstrap"
 }
 variable "rubrik_user" {
-  type    = string
-  default = "admin"
+  type        = string
+  default     = "admin"
   description = "username to log in to Rubrik CDM GUI"
 }
 variable "rubrik_pass" {
-  type    = string
-  default = "rubrik123"
+  type        = string
+  default     = "rubrik123"
   description = "password for Rubrik CDM GUI login"
 }
 variable "rubrik_cluster_name" {

@@ -181,7 +181,7 @@ data "aws_ami" "amazon_linux2" {
 }
 resource "aws_instance" "bastion_instance" {
   ami                    = data.aws_ami.amazon_linux2.image_id
-  instance_type          = var.aws_bastion_instance_type
+  instance_type          = var.aws_instance_type
   vpc_security_group_ids = [aws_security_group.bastion.id]
   subnet_id              = aws_subnet.public.id
   key_name               = var.aws_key_name
