@@ -27,7 +27,7 @@ module "rubrik-cloud-cluster" {
   aws_region                               = var.aws_region
   aws_subnet_id                            = aws_subnet.rubrik.id
   security_group_id_inbound_ssh_https_mgmt = aws_security_group.bastion.id
-  aws_public_key_name                      = var.bilh_aws_demo_master_key_name
+  aws_public_key_name                      = var.aws_key_name
   aws_disable_api_termination              = false
   number_of_nodes                          = var.rubrik_node_count
   force_destroy_s3_bucket                  = true
@@ -184,7 +184,7 @@ resource "aws_instance" "bastion_instance" {
   instance_type          = var.aws_bastion_instance_type
   vpc_security_group_ids = [aws_security_group.bastion.id]
   subnet_id              = aws_subnet.public.id
-  key_name               = var.bilh_aws_demo_master_key_name
+  key_name               = var.aws_key_name
   tags = {
     Name = format("%s%s%s", var.aws_prefix, var.aws_region, "-bastion")
   }
@@ -192,7 +192,7 @@ resource "aws_instance" "bastion_instance" {
     #!/bin/bash
     KEYPATH="${local.ssh_key_full_file_path}" && export KEYPATH
     touch $KEYPATH
-    echo "${var.bilh_aws_demo_master_key}" > $KEYPATH
+    echo "${var.aws_key}" > $KEYPATH
     chmod 0400 $KEYPATH
     chown ec2-user:ec2-user $KEYPATH
     yum update -y

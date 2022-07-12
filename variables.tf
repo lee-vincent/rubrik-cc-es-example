@@ -1,39 +1,47 @@
-variable "aws_bastion_instance_type" {
+# AWS Variables
+variable "aws_region" {
   type = string
 }
-variable "bilh_aws_demo_master_key_name" {
+variable "aws_zone" {
   type = string
-}
-variable "bilh_aws_demo_master_key_pub" {
-  type      = string
-  sensitive = true
 }
 variable "aws_profile" {
   type        = string
-  description = "AWS profile."
+  description = "AWS profile"
 }
-variable "bilh_aws_demo_master_key" {
+variable "aws_key_name" {
   type = string
 }
-
+variable "aws_key_pub" {
+  type      = string
+  sensitive = true
+}
+variable "aws_key" {
+  type = string
+}
+variable "aws_prefix" {
+}
+variable "aws_bastion_instance_type" {
+  type = string
+}
+# Rubrik Cloud Cluster Variables
 variable "rubrik_support_password" {
   type = string
+  description = "support.rubrik.com password"
 }
-
-variable "aws_prefix" {
-
-}
-
 variable "rubrik_admin_email" {
   type = string
+  description = "support.rubrik.com email - will also be used as admin email during cluster bootstrap"
 }
 variable "rubrik_user" {
   type    = string
   default = "admin"
+  description = "username to log in to Rubrik CDM GUI"
 }
 variable "rubrik_pass" {
   type    = string
   default = "rubrik123"
+  description = "password for Rubrik CDM GUI login"
 }
 variable "rubrik_cluster_name" {
   type    = string
@@ -59,11 +67,6 @@ variable "rubrik_use_cloud_storage" {
   type    = string
   default = "y"
 }
-variable "ssh_key_pair_path" {
-  type    = string
-  default = "/home/ec2-user/.ssh/"
-}
-
 variable "rubrik_fileset_name_prefix" {
   type    = string
   default = "EPIC"
@@ -72,10 +75,8 @@ variable "rubrik_fileset_folder_path" {
   type    = string
   default = "/mnt/epic-iscsi-vol"
 }
-
-variable "aws_region" {
-  type = string
-}
-variable "aws_zone" {
-  type = string
+# i can make this a local variable instead
+variable "ssh_key_pair_path" {
+  type    = string
+  default = "/home/ec2-user/.ssh/"
 }

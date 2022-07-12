@@ -2,7 +2,7 @@ data "aws_subnet" "rubrik" {
   id = aws_subnet.rubrik.id
 }
 locals {
-  ssh_key_full_file_path = format("%s%s", "${var.ssh_key_pair_path}", "${var.bilh_aws_demo_master_key_name}")
+  ssh_key_full_file_path = format("%s%s", "${var.ssh_key_pair_path}", "${var.aws_key_name}")
 }
 resource "local_file" "configure_sh" {
   content = templatefile("${path.module}/configure.tftpl",
@@ -30,8 +30,8 @@ resource "local_file" "configure_sh" {
   filename = "${path.module}/configure.sh"
 }
 resource "aws_key_pair" "pure_cbs_key_pair" {
-  key_name   = var.bilh_aws_demo_master_key_name
-  public_key = var.bilh_aws_demo_master_key_pub
+  key_name   = var.aws_key_name
+  public_key = var.aws_key_pub
 }
 resource "aws_instance" "linux_iscsi_workload" {
   depends_on = [
@@ -42,7 +42,7 @@ resource "aws_instance" "linux_iscsi_workload" {
   vpc_security_group_ids = [aws_security_group.bastion.id, module.rubrik-cloud-cluster.workoad_security_group_id]
   get_password_data      = false
   subnet_id              = aws_subnet.workload.id
-  key_name               = var.bilh_aws_demo_master_key_name
+  key_name               = var.aws_key_name
   tags = {
     Name = "iscsi_workload"
   }
@@ -58,7 +58,7 @@ resource "aws_instance" "linux_iscsi_workload" {
     #!/bin/bash
     KEYPATH="${local.ssh_key_full_file_path}" && export KEYPATH
     touch $KEYPATH
-    echo "${var.bilh_aws_demo_master_key}" > $KEYPATH
+    echo "${var.aws_key}" > $KEYPATH
     chmod 0400 $KEYPATH
     chown ec2-user:ec2-user $KEYPATH
     yum update -y

@@ -27,7 +27,7 @@ wait for cbs to provision
 enable ssh local port forwarding
 run configure.sh -- scripts that sets up everythign else -- on the bastion instance
    calls init-rubrik.sh to download RBS on the workload and proxy
-      ssh -i .ssh/bilh_aws_demo_master_key -oStrictHostKeyChecking=no ec2-user@"${aws_instance.linux_iscsi_workload.private_ip}" sudo /home/ec2-user/install-rubrik.sh
+      ssh -i .ssh/aws_key -oStrictHostKeyChecking=no ec2-user@"${aws_instance.linux_iscsi_workload.private_ip}" sudo /home/ec2-user/install-rubrik.sh
    create rubrik fileset script
 
 ssh to bastion server
